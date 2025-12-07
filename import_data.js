@@ -18,22 +18,17 @@ async function importData() {
     
     const db = client.db(process.env.DB_NAME || 'lessonsdb');
     
-    // Read and import lessons
     const lessonsPath = path.join(__dirname, 'sample_lessons_data.json');
     const lessonsData = JSON.parse(fs.readFileSync(lessonsPath, 'utf8'));
     const lessonsCollection = db.collection('lesson');
     
-    // Clear existing data (optional - comment out if you want to keep existing data)
-    // await lessonsCollection.deleteMany({});
     
     const lessonResult = await lessonsCollection.insertMany(lessonsData);
     console.log(`✅ Imported ${lessonResult.insertedCount} lessons`);
     
-    // Verify import
     const lessonCount = await lessonsCollection.countDocuments();
     console.log(`\n📊 Total lessons in database: ${lessonCount}`);
     
-    // Display sample lesson
     const sampleLesson = await lessonsCollection.findOne({});
     console.log('\n📝 Sample lesson:');
     console.log(JSON.stringify(sampleLesson, null, 2));
@@ -51,6 +46,4 @@ async function importData() {
   }
 }
 
-// Run the import
 importData();
-

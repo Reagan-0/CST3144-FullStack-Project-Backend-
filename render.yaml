@@ -10,8 +10,8 @@ services:
       - key: PORT
         value: 10000
       - key: MONGODB_URI
-        sync: false  # Set this in Render dashboard
+        sync: false 
       - key: DB_NAME
         value: cst3144fullstackproject
-        sync: false  # Optional: Set in Render dashboard if different
+        sync: false
 
