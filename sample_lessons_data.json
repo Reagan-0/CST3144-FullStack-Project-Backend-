@@ -1,0 +1,87 @@
+[
+  {
+    "name": "Mathematics",
+    "locat": "London",
+    "price": 50,
+    "spaces": 5,
+    "icon": "fa-solid fa-calculator"
+  },
+  {
+    "name": "English Literature",
+    "locat": "Manchester",
+    "price": 45,
+    "spaces": 5,
+    "icon": "fa-solid fa-book"
+  },
+  {
+    "name": "Science",
+    "locat": "Birmingham",
+    "price": 55,
+    "spaces": 5,
+    "icon": "fa-solid fa-flask"
+  },
+  {
+    "name": "History",
+    "locat": "Leeds",
+    "price": 40,
+    "spaces": 5,
+    "icon": "fa-solid fa-landmark"
+  },
+  {
+    "name": "Geography",
+    "locat": "Liverpool",
+    "price": 42,
+    "spaces": 5,
+    "icon": "fa-solid fa-globe"
+  },
+  {
+    "name": "Art",
+    "locat": "Sheffield",
+    "price": 48,
+    "spaces": 5,
+    "icon": "fa-solid fa-paintbrush"
+  },
+  {
+    "name": "Music",
+    "locat": "Bristol",
+    "price": 52,
+    "spaces": 5,
+    "icon": "fa-solid fa-music"
+  },
+  {
+    "name": "Physical Education",
+    "locat": "Cardiff",
+    "price": 38,
+    "spaces": 5,
+    "icon": "fa-solid fa-dumbbell"
+  },
+  {
+    "name": "Computer Science",
+    "locat": "Edinburgh",
+    "price": 60,
+    "spaces": 5,
+    "icon": "fa-solid fa-laptop-code"
+  },
+  {
+    "name": "French",
+    "locat": "Glasgow",
+    "price": 44,
+    "spaces": 5,
+    "icon": "fa-solid fa-language"
+  },
+  {
+    "name": "Spanish",
+    "locat": "Newcastle",
+    "price": 44,
+    "spaces": 5,
+    "icon": "fa-solid fa-comments"
+  },
+  {
+    "name": "German",
+    "locat": "Nottingham",
+    "price": 44,
+    "spaces": 5,
+    "icon": "fa-solid fa-globe-europe"
+  }
+]
+

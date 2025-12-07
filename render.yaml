@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: lessons-backend
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: MONGODB_URI
+        sync: false  # Set this in Render dashboard
+      - key: DB_NAME
+        value: cst3144fullstackproject
+        sync: false  # Optional: Set in Render dashboard if different
+
