@@ -110,6 +110,32 @@ app.post('/order', async (req, res) => {
   }
 });
 
+app.put('/lessons', async (req, res) => {
+  var updates = req.body;
+  if (!Array.isArray(updates)) {
+    return res.status(400).json({ error: 'Expected an array of updates' });
+  }
+  
+  try {
+    var operations = updates.map(update => ({
+      updateOne: {
+        filter: { _id: new ObjectId(update.id) },
+        update: { $set: { spaces: update.spaces, taken: update.taken } }
+      }
+    }));
+    
+    var result = await lessonsCollection.bulkWrite(operations);
+    console.log('Bulk update result:', result.modifiedCount + ' lessons updated');
+    res.json({ 
+      message: 'Lessons updated successfully',
+      modifiedCount: result.modifiedCount 
+    });
+  } catch (err) {
+    console.error('Error updating lessons:', err);
+    res.status(500).json({ error: 'Failed to update lessons' });
+  }
+});
+
 app.listen(port, () => {
   console.log("Server is running on port " + port);
 });
