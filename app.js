@@ -45,6 +45,17 @@ app.use((req, res, next) => {
   next();
 });
 
+app.get('/lessons', async (req, res) => {
+  try {
+    var lessons = await lessonsCollection.find({}).toArray();
+    console.log('Retrieved ' + lessons.length + ' lessons');
+    res.json(lessons);
+  } catch (err) {
+    console.error('Error fetching lessons:', err);
+    res.status(500).json({ error: 'Failed to fetch lessons' });
+  }
+});
+
 app.listen(port, () => {
   console.log("Server is running on port " + port);
 });
