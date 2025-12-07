@@ -2,6 +2,8 @@ var express = require("express");
 var cors = require("cors");
 var bodyParser = require("body-parser");
 var morgan = require("morgan");
+var path = require("path");
+var fs = require("fs");
 var { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 require('dotenv').config();
 
@@ -134,6 +136,24 @@ app.put('/lessons', async (req, res) => {
     console.error('Error updating lessons:', err);
     res.status(500).json({ error: 'Failed to update lessons' });
   }
+});
+
+app.get('/images/:filename', (req, res) => {
+  var imagesPath = path.join(__dirname, 'images');
+  var filename = req.params.filename;
+  var filePath = path.join(imagesPath, filename);
+  
+  fs.access(filePath, fs.constants.F_OK, (err) => {
+    if (err) {
+      res.status(404).json({ error: 'Image file not found' });
+    } else {
+      res.sendFile(filePath, (sendErr) => {
+        if (sendErr) {
+          res.status(404).json({ error: 'Image file not found' });
+        }
+      });
+    }
+  });
 });
 
 app.listen(port, () => {
