@@ -156,6 +156,15 @@ app.get('/images/:filename', (req, res) => {
   });
 });
 
+app.use((req, res) => {
+  res.status(404).json({ error: "Resource not found" });
+});
+
+app.use((err, req, res, next) => {
+  console.error('Global error handler:', err);
+  res.status(500).json({ error: 'An error occurred' });
+});
+
 app.listen(port, () => {
   console.log("Server is running on port " + port);
 });
