@@ -2,7 +2,7 @@ var express = require("express");
 var cors = require("cors");
 var bodyParser = require("body-parser");
 var morgan = require("morgan");
-var { MongoClient, ServerApiVersion } = require("mongodb");
+var { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 require('dotenv').config();
 
 var app = express();
@@ -53,6 +53,19 @@ app.get('/lessons', async (req, res) => {
   } catch (err) {
     console.error('Error fetching lessons:', err);
     res.status(500).json({ error: 'Failed to fetch lessons' });
+  }
+});
+
+app.get('/lessons/:id', async (req, res) => {
+  try {
+    var lesson = await lessonsCollection.findOne({_id: new ObjectId(req.params.id)});
+    if (!lesson) {
+      return res.status(404).json({ error: 'Lesson not found' });
+    }
+    res.json(lesson);
+  } catch (err) {
+    console.error('Error fetching lesson:', err);
+    res.status(500).json({ error: 'Failed to fetch lesson' });
   }
 });
 
