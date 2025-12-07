@@ -69,6 +69,29 @@ app.get('/lessons/:id', async (req, res) => {
   }
 });
 
+app.get('/search', async (req, res) => {
+  var query = req.query.query;
+  if (!query) {
+    return res.status(400).json({ error: 'Need query parameter' });
+  }
+  
+  try {
+    var regex = new RegExp(query, 'i');
+    var results = await lessonsCollection.find({
+      $or: [
+        { name: { $regex: regex } },
+        { locat: { $regex: regex } }
+      ]
+    }).toArray();
+    
+    console.log('Search results:', results.length);
+    res.json(results);
+  } catch (err) {
+    console.error('Error searching lessons:', err);
+    res.status(500).json({ error: 'Failed to search lessons' });
+  }
+});
+
 app.listen(port, () => {
   console.log("Server is running on port " + port);
 });
