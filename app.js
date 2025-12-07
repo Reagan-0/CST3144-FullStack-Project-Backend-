@@ -92,6 +92,24 @@ app.get('/search', async (req, res) => {
   }
 });
 
+app.post('/order', async (req, res) => {
+  var order = req.body;
+  console.log('New order:', order);
+  
+  try {
+    var result = await ordersCollection.insertOne(order);
+    if (result.insertedId) {
+      var newOrder = await ordersCollection.findOne({ _id: result.insertedId });
+      res.status(201).json(newOrder);
+    } else {
+      res.status(500).json({ error: 'Failed to create order' });
+    }
+  } catch (err) {
+    console.error('Error creating order:', err);
+    res.status(500).json({ error: 'Failed to create order' });
+  }
+});
+
 app.listen(port, () => {
   console.log("Server is running on port " + port);
 });
